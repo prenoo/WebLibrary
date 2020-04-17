@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<style type="text/css">
+#full {
+	background: #69D2E7;
+	height: 100%;
+}
+</style>
+	<title>Könyvtár</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<h:outputStylesheet library="css" name="hamburger.css" />
+
+
+</h:head>
+<h:body>
+
+	<div class="l-site">
+		<div class="l-nav">
+			<nav class="nav">
+
+
+			<ul>
+				<li><p>
+						<h:outputLink class="nav-primary" value="index.xhtml">Könyvtár</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-kolcsonzes.xhtml">Kölcsönzések</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-tag.xhtml">Tagok listázása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-keszlet.xhtml">Készlet listázása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="add-tag-form.xhtml">Új tag hozzáadása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="add-keszlet-form.xhtml">Új készlet felvitele</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="list-keses.xhtml">Lejárt kölcsönzések megtekintése</h:outputLink>
+					</p></li>
+
+				<li><h:form style="color:#ffffff">
+						<h:inputText class="line"
+							value="#{kolcsonzesviewcontroller.napok}" /> napja kikölcsönzött, aktív tételek listázása
+<h:commandButton class="modern" value="Lekérdezés"
+							action="#{kolcsonzesviewcontroller.kolcsonNapok}"></h:commandButton>
+
+					</h:form></li>
+			</ul>
+
+			</nav>
+
+
+		</div>
+		<div class="l-page">
+			<div class="menu">
+				<div class="menu-hamburger"></div>
+			</div>
+			<section class="band band-a">
+			<div class="band-container">
+
+				<div id="full">
+
+					<h2>SQL parancsok:</h2>
+					<p>A WebContent/resources mappán belül a beadando.sql fájl
+						futtatás után létrehozza a szükséges táblákat és feltölti őket
+						tesztadatokkal. (MySQL-ben tesztelt és működik)</p>
+
+					<h2>Menü:</h2>
+					<p>Bal oldalt van a menü, ahol az első link a kezdőoldalra visz
+						vissza, ahol csak a feladat leírása van.</p>
+					<p>A következő 3 menüpont az adatbázisban szereplő táblák
+						lekérdezésére szolgál, valamint új tagok/kölcsönzések/készleteket
+						is lehet felvinni.</p>
+					<br />
+					<h2>Kölcsönzés menete</h2>
+					<p>Új kölcsönzés felvételekor csak a tagID-t és keszletID-t
+						kell megadni, mely a kikölcsönző tagnak az ID-ja, és annak a
+						készletnek az ID-ja amit ki akar venni. Csak olyan azonosítot
+						lehet megadni, ami létezik. Minden más adatot magától generál a
+						program, egy egyedi kölcsönzés azonosító ID-t, a kivétel dátumának
+						a mai napot írja be, határidőnek pedig a maihoz képest +30 napot.
+						Kivételkor a készlet darabszáma automatikusan csökken, ha 0 darab
+						van készleten nem enged kivenni semmit. Ha egy tagnak 6 aktív
+						kölcsönzése van akkor sem engedi kivenni az adott készletet. Egy
+						kölcsönzésnél a "visszahozta" linkre kattintva a visszahozás
+						dátumához automatiksan beírja az akkori napot, és megnöveli a
+						készlet darabszámát 1-el, így újra kölcsönözhetővé válik (ha
+						előtte 0 darab volt).</p>
+					<br />
+
+					<h2>Tagok listázása</h2>
+					<p>A tagok listázása menüpontban listázza az összes
+						adatbázisban található tagot. A táblázat fejlécében lehet keresni
+						azonosítóra (csak pontos egyezést vizsgál, 1-re nem hozza ki pl. a
+						11-et), névre és személyire a részleges egyezés is engedett.
+						Szerkesztésnél az adott tag szerkeszthető, törlésnél "töröl" (az
+						adatbázisba benne marad, de a státusza passzívvá válik, és a
+						honlap nem fogja listázni).</p>
+					<p>Új tag hozzáadásánal a név, cím és személyi mezők megadása
+						kötelező, és csak valid személyi formátumot fogad el</p>
+					<h2>Készletek listázása</h2>
+					<p>Készlet listázása a tag listával szinte teljesen megegyező.</p>
+					<br />
+
+					<h2>Késések lekérdezése</h2>
+					<p>Lejárt kölcsönzések megtekintésénél csak azokat a
+						kölcsönzéseket listázza ki, amelyeket még nem hoztak vissza, de
+						határidejük már lejárt. Az utolsó oszlopban kiszámolja a késett
+						napok számát is.</p>
+
+					<h2>Csak az x napja kikölcsönzött készletek listázása</h2>
+					<p>Megadható, hogy csak az n napja kiadott, és még nem
+						visszahozott könyveket listázza a honlap. Itt számolja hány nap
+						telt el a kölcsönzés óta, illetve kiírja a késett napok számát is.
+					</p>
+
+
+				</div>
+			</div>
+			</section>
+		</div>
+	</div>
+
+
+</h:body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<f:metadata>
+	<f:event type="preRenderView"
+		listener="#{kolcsonzescontroller.loadKolcsonzesek}" />
+</f:metadata>
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Kölcsönzések</title>
+
+	<h:outputStylesheet library="css" name="hamburger.css" />
+</h:head>
+
+<h:body>
+	<div class="l-site">
+		<div class="l-nav">
+			<nav class="nav">
+
+
+			<ul>
+				<li><p>
+						<h:outputLink class="nav-primary" value="index.xhtml">Könyvtár</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-kolcsonzes.xhtml">Kölcsönzések</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-tag.xhtml">Tagok listázása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-keszlet.xhtml">Készlet listázása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="add-tag-form.xhtml">Új tag hozzáadása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="add-keszlet-form.xhtml">Új készlet felvitele</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="list-keses.xhtml">Lejárt kölcsönzések megtekintése</h:outputLink>
+					</p></li>
+
+				<li><h:form style="color:#ffffff">
+						<h:inputText class="line"
+							value="#{kolcsonzesviewcontroller.napok}" /> napja kikölcsönzött, aktív tételek listázása
+<h:commandButton class="modern" value="Lekérdezés"
+							action="#{kolcsonzesviewcontroller.kolcsonNapok}"></h:commandButton>
+
+					</h:form></li>
+			</ul>
+
+			</nav>
+		</div>
+
+		<div class="l-page">
+			<div class="menu">
+				<div class="menu-hamburger"></div>
+			</div>
+
+
+			<section class="band band-a">
+			<div class="band-container">
+				<div id="full">
+					<h1>Kölcsönzések listázása</h1>
+
+
+					<h:messages globalOnly="true" />
+
+					<h:button value="Új kölcsön" class="modern"
+						outcome="add-kolcson-form" />
+
+					<h:form id="form1">
+						<p:dataTable id="mytable"
+							value="#{kolcsonzescontroller.kolcsonzesek}" var="o" styleClass="centeredColumnContent"
+							paginator="true" rows="20" rowsPerPageTemplate="20,50,100"
+							paginatorAlwaysVisible="true" paginatorPosition="bottom"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+							<p:column width="50" sortBy="#{o.kolcsonID}">
+								<f:facet name="header">
+									<h:outputText value="ID" />
+								</f:facet>
+								<h:outputText value="#{o.kolcsonID}" />
+							</p:column>
+							<p:column filterBy="#{o.tagID}" filterMatchMode="exact">
+								<f:facet name="header">
+									<h:outputText value="tagID" />
+								</f:facet>
+								<h:outputText value="#{o.tagID}" />
+							</p:column>
+							<p:column filterBy="#{o.keszletID}" filterMatchMode="exact">
+								<f:facet name="header">
+									<h:outputText value="keszletID" />
+								</f:facet>
+								<h:outputText value="#{o.keszletID}" />
+							</p:column>
+							<p:column sortBy="#{o.kivetel_datum}" styleClass="centeredColumnContent">
+								<f:facet name="header">
+									<h:outputText value="Kivétel dátuma" />
+								</f:facet>
+								<h:outputText value="#{o.kivetel_datum}" />
+							</p:column>
+							<p:column sortBy="#{o.hatarido}">
+								<f:facet name="header">
+									<h:outputText value="Visszahozás határideje" />
+								</f:facet>
+								<h:outputText value="#{o.hatarido}" />
+							</p:column>
+							<p:column sortBy="#{o.vissza_datum}">
+								<f:facet name="header">
+									<h:outputText value="Visszahozás dátuma" />
+								</f:facet>
+								<h:outputText value="#{o.vissza_datum}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Action</f:facet>
+
+								<!--  the value for each row -->
+								<h:commandLink value="Visszahozta"
+									action="#{kolcsonzescontroller.visszahoz(o.kolcsonID)}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+
+				</div>
+			</div>
+			</section>
+		</div>
+	</div>
+
+
+
+
+</h:body>
+</html>

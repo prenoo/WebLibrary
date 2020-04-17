@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<style type="text/css">
+#full {
+	background: #69D2E7;
+	height: 100%;
+}
+</style>
+	<title>Könyvtár</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<h:outputStylesheet library="css" name="hamburger.css" />
+
+
+</h:head>
+<h:body>
+
+	<div class="l-site">
+		<div class="l-nav">
+			<nav class="nav">
+
+
+			<ul>
+				<li><p>
+						<h:outputLink class="nav-primary" value="index.xhtml">Könyvtár</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-kolcsonzes.xhtml">Kölcsönzések</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-tag.xhtml">Tagok listázása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-primary" value="list-keszlet.xhtml">Készlet listázása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="add-tag-form.xhtml">Új tag hozzáadása</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="add-keszlet-form.xhtml">Új készlet felvitele</h:outputLink>
+					</p></li>
+				<li><p>
+						<h:outputLink class="nav-secondary" value="list-keses.xhtml">Lejárt kölcsönzések megtekintése</h:outputLink>
+					</p></li>
+
+				<li><h:form style="color:#ffffff">
+						<h:inputText class="line"
+							value="#{kolcsonzesviewcontroller.napok}" /> napja kikölcsönzött, aktív tételek listázása
+<h:commandButton class="modern" value="Lekérdezés"
+							action="#{kolcsonzesviewcontroller.kolcsonNapok}"></h:commandButton>
+
+					</h:form></li>
+			</ul>
+
+			</nav>
+
+
+		</div>
+		<div class="l-page">
+			<div class="menu">
+				<div class="menu-hamburger"></div>
+			</div>
+			<section class="band band-a">
+			<div class="band-container">
+
+				<div id="full">
+
+					<h1>2. Könyvtári nyilvántartás</h1>
+					<h1>
+						<a href="mukodes.xhtml">Honlap működésének leírása</a>
+					</h1>
+					<h2>Általános leírás</h2>
+					<p>A cél, egy képzeletbeli könyvtári kölcsönző-nyilvántartó
+						szoftver tervezése és implementálása. A könyvtárban könyveket és
+						multimédia anyagokat (cd, kazetta) lehet kölcsönözni, beiratkozott
+						tagoknak. Az alkalmazást a könyvtár vezetője és dolgozói
+						használják, hogy regisztrálják a ki és beiratkozásokat és
+						ellenőrizzék a tagok kölcsönzéseit, listázzák azokat a tagokat,
+						akik nem vitték vissza a kölcsönzött anyagokat időben.</p>
+
+					<h2>Felhasználási esetek</h2>
+					<h3>Tagnyílvántartás</h3>
+					<ul>
+						<li>A rendszer nyílvántartja a könyvtár kölcsönzőit.</li>
+						<li>Új tagok felvételénél a rendszer bekéri a nevet,
+							telefonszámot, személyigazolvány számot, lakcímet.</li>
+						<li>A regisztrálás után, a rendszer egyedi azonosítóval látja
+							el a tagokat.</li>
+						<li>A felvettek listájában lehet keresni név,
+							személyigazolvány szám, azonosító alapján.</li>
+						<li>A tagok adatait lehet módosítani vagy egy létező tagot
+							törölni. A törlés csak státuszváltással jár, nem fizikai
+							törléssel.</li>
+
+					</ul>
+
+					<h3>Készletnyílvántartás</h3>
+					<ul>
+						<li>A rendszer nyílvántartja a könyvek és multimédia anyagok
+							adatait: pl. típus (cd, könyv, kotta), szerző, cím, beszerzés
+							dátuma, sorszám, státusz (szabad, kikölcsönzött, selejtezett).</li>
+						<li>Itt lehet az új könyveket nyílvántartásba venni.</li>
+						<li>A könyvtár készletét lehet listázni, keresni cím, szerző
+							szerint.</li>
+					</ul>
+					<h3>Kölcsönzés</h3>
+
+					<p>Amikor egy tag kölcsönözni szeretne, szükség van az
+						azonosító adataira, illetve egy kölcsönzendő könyv, cd
+						azonosítójára. A rendszerben először a felhasználót kell
+						kikeresni. Az adatlapon meg lehet nézni, hogy van-e már
+						kölcsönözve neki valami. A kikölcsönzött tételek száma maximálva
+						van. (pl 6)</p>
+					<h3>Kölcsönzés befejezése</h3>
+					<p>Amikor valaki visszahoz a könyvtári egységét, akkor azt
+						azonosítója alapján lehet felszabadítani. Az ügyintéző a sorszám
+						alapján rákeres az adott könyvre, cd-re és az adatlapján
+						visszaállíthatja szabad státuszúra, így megszűnik a kölcsönzés. Az
+						adatlapnak tartalmaznia kell, hogy mikor kölcsönözték ki, és ki
+						volt az, amennyiben kikölcsönzött állapotban van.</p>
+					<h3>Késések lekérdezése</h3>
+					<p>A rendszer lehetőséget ad egy bizonyos idő után (pl 30 nap –
+						konfigurálható) még mindig kikölcsönzött könyvek lekérdezésére. A
+						listában szerepelnie kell a tételeknek és a kölcsönző adatainak
+						is, illetve a kikölcsönzés dátumának, és a számított késésnek is.
+					</p>
+
+
+
+
+				</div>
+			</div>
+			</section>
+		</div>
+	</div>
+
+
+</h:body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Tag hozzáadása</title>
+
+	<h:outputStylesheet library="css" name="hamburger.css" />
+</h:head>
+
+<h:body>
+
+	<div class="l-site">
+		<div class="l-nav">
+			<nav class="nav">
+
+
+				<ul>
+					<li><p>
+							<h:outputLink class="nav-primary" value="index.xhtml">Könyvtár</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-primary" value="list-kolcsonzes.xhtml">Kölcsönzések</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-primary" value="list-tag.xhtml">Tagok listázása</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-primary" value="list-keszlet.xhtml">Készlet listázása</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-secondary" value="add-tag-form.xhtml">Új tag hozzáadása</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-secondary"
+								value="add-keszlet-form.xhtml">Új készlet felvitele</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-secondary" value="list-keses.xhtml">Lejárt kölcsönzések megtekintése</h:outputLink>
+						</p></li>
+
+					<li><h:form style="color:#ffffff">
+							<h:inputText class="line"
+								value="#{kolcsonzesviewcontroller.napok}" /> napja kikölcsönzött, aktív tételek listázása
+<h:commandButton class="modern" value="Lekérdezés"
+								action="#{kolcsonzesviewcontroller.kolcsonNapok}"></h:commandButton>
+
+						</h:form></li>
+				</ul>
+
+			</nav>
+		</div>
+
+
+
+		<div class="l-page">
+			<div class="menu">
+				<div class="menu-hamburger"></div>
+			</div>
+
+
+			<section class="band band-a">
+				<div class="band-container">
+					<div id="full">
+
+
+						<h2>Új tag</h2>
+						<div id="container">
+							<h3>Tag felvétele</h3>
+
+							<h:messages globalOnly="true" />
+
+							<h:form id="form" style="margin-top: 10px;">
+								<h:panelGrid columns="3">
+
+
+									<h:outputLabel>Nev:</h:outputLabel>
+									<h:inputText value="#{tag.nev}" id="nev" required="true"
+										requiredMessage="Kötelező megadni" />
+									<h:message for="nev" />
+
+									<h:outputLabel>Cim:</h:outputLabel>
+									<h:inputText value="#{tag.cim}" id="cim" required="true"
+										requiredMessage="Kötelező megadni" />
+									<h:message for="cim" />
+
+									<h:outputLabel>Telefonszam:</h:outputLabel>
+									<h:inputText value="#{tag.telefonszam}" id="telefonszam" />
+									<h:message for="telefonszam" />
+
+									<h:outputLabel>Szemelyi:</h:outputLabel>
+									<h:inputText value="#{tag.szemelyi}" id="szemelyi"
+										required="true" requiredMessage="Kötelező megadni">
+										<f:validateRegex
+											pattern="([0-9][0-9][0-9][0-9][0-9][0-9][A-Z][A-Z])"></f:validateRegex>
+									</h:inputText>
+									<h:message for="szemelyi" />
+
+									<h:outputLabel />
+									<h:commandButton value="Save" class="modern"
+										action="#{tagcontroller.addTag(tag)}"
+										onclick="alert('Tag hozzáadva!')" />
+
+								</h:panelGrid>
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+</h:body>
+</html>

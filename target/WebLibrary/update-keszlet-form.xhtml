@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Keszlet szerkesztese</title>
+
+	<h:outputStylesheet library="css" name="hamburger.css" />
+
+
+</h:head>
+
+<h:body>
+
+
+	<div class="l-site">
+		<div class="l-nav">
+			<nav class="nav">
+
+
+				<ul>
+					<li><p>
+							<h:outputLink class="nav-primary" value="index.xhtml">Könyvtár</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-primary" value="list-kolcsonzes.xhtml">Kölcsönzések</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-primary" value="list-tag.xhtml">Tagok listázása</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-primary" value="list-keszlet.xhtml">Készlet listázása</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-secondary" value="add-tag-form.xhtml">Új tag hozzáadása</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-secondary"
+								value="add-keszlet-form.xhtml">Új készlet felvitele</h:outputLink>
+						</p></li>
+					<li><p>
+							<h:outputLink class="nav-secondary" value="list-keses.xhtml">Lejárt kölcsönzések megtekintése</h:outputLink>
+						</p></li>
+
+					<li><h:form style="color:#ffffff">
+							<h:inputText class="line"
+								value="#{kolcsonzesviewcontroller.napok}" /> napja kikölcsönzött, aktív tételek listázása
+<h:commandButton class="modern" value="Lekérdezés"
+								action="#{kolcsonzesviewcontroller.kolcsonNapok}"></h:commandButton>
+
+						</h:form></li>
+				</ul>
+
+			</nav>
+		</div>
+
+		<div class="l-page">
+			<div class="menu">
+				<div class="menu-hamburger"></div>
+			</div>
+
+
+			<section class="band band-a">
+				<div class="band-container">
+					<div id="full">
+						<h3>Keszlet szerkesztese</h3>
+
+						<h:messages globalOnly="true" />
+
+						<h:form id="form" style="margin-top: 10px;">
+							<h:panelGrid columns="3">
+
+								<h:outputLabel>Nev:</h:outputLabel>
+								<h:inputText value="#{keszlet.szerzo}" id="szerzo" />
+								<h:message for="szerzo" />
+
+								<h:outputLabel>Cim:</h:outputLabel>
+								<h:inputText value="#{keszlet.cim}" id="cim" />
+								<h:message for="cim" />
+
+								<h:outputLabel>Telefon:</h:outputLabel>
+								<h:inputText value="#{keszlet.kategoria}" id="kategoria"
+									required="true" requiredMessage="Your email is mandatory." />
+								<h:message for="kategoria" />
+
+								<h:outputLabel>Darab:</h:outputLabel>
+								<h:inputText value="#{keszlet.darabszam}" id="darabszam" />
+								<h:message for="darabszam" />
+
+								<h:inputHidden value="#{keszlet.keszlet_ID}" />
+
+								<h:commandButton value="Save" styleClass="save"
+									action="#{keszletcontroller.updateKeszlet(keszlet)}" />
+
+							</h:panelGrid>
+						</h:form>
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</h:body>
+</html>
